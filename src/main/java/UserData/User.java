@@ -72,8 +72,8 @@ public class User implements Comparable<User>{
     private UnorderedListADT<Pair<Integer, String>> academicFormation;
     private UnorderedListADT<Triplet<Integer, String, String>> professionalExperience;
     private UnorderedListADT<String> skills;
-    private UnorderedListADT<User> contacts;
-    private UnorderedListADT<User> mentions;
+    private UnorderedListADT<Integer> contacts;
+    private UnorderedListADT<Integer> mentions;
 
 
     public User(int id, String name, int age, String email, int views) {
@@ -85,8 +85,8 @@ public class User implements Comparable<User>{
         this.academicFormation = new ArrayUnorderedList<Pair<Integer, String>>();
         this.professionalExperience = new ArrayUnorderedList<Triplet<Integer, String, String>>();
         this.skills = new ArrayUnorderedList<String>();
-        this.contacts = new ArrayUnorderedList<User>();
-        this.mentions = new ArrayUnorderedList<User>();
+        this.contacts = new ArrayUnorderedList<Integer>();
+        this.mentions = new ArrayUnorderedList<Integer>();
     }
 
     public int getId() {
@@ -131,16 +131,16 @@ public class User implements Comparable<User>{
     public void setSkills(ListsAndIterators.UnorderedListADT<String> skills) {
         this.skills = skills;
     }
-    public UnorderedListADT<User> getContacts() {
+    public UnorderedListADT<Integer> getContacts() {
         return contacts;
     }
-    public void setContacts(UnorderedListADT<User> contacts) {
+    public void setContacts(UnorderedListADT<Integer> contacts) {
         this.contacts = contacts;
     }
-    public UnorderedListADT<User> getMentions() {
+    public UnorderedListADT<Integer> getMentions() {
         return mentions;
     }
-    public void setMentions(UnorderedListADT<User> mentions) {
+    public void setMentions(UnorderedListADT<Integer> mentions) {
         this.mentions = mentions;
     }
     @Override

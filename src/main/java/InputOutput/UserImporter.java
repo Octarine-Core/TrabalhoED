@@ -3,6 +3,7 @@ import ListsAndIterators.ArrayUnorderedList;
 import UserData.User;
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
+import sun.rmi.server.InactiveGroupException;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -62,7 +63,20 @@ public class UserImporter {
                 User.Triplet<Integer,String,String> triplet = new User.Triplet<>(ano,cargo,empresa);
                 experienciaProfissional.addToFront(triplet);
             }
+            //skills
             ArrayUnorderedList<String> skills = new ArrayUnorderedList<>();
+            JSONArray skillsArray = (JSONArray) jUser.get("skills");
+            for (Object o :
+                    skillsArray) {
+                skills.addToFront((String)o);
+            }
+            //mencoes
+            ArrayUnorderedList<Integer> mentions = new ArrayUnorderedList<>();
+            JSONArray mentionsArray = (JSONArray) jUser.get("mencoes");
+            for (Object o :
+                    mentionsArray) {
+                mentions.addToFront( ((Integer)((JSONObject)o).get("id")));
+            }
 
         }
     }
