@@ -1,4 +1,4 @@
-package Interfaces;
+package Graphs;
 
 /**
  * NetworkADT defines the interface to a network.

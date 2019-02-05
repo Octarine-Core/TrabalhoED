@@ -2,7 +2,7 @@ package ListsAndIterators;
 
 import java.util.Iterator;
 
-public class ArrayList<T> implements ListADT<T>{
+public class ArrayList<T> implements ListADT<T>, Iterable<T>{
 
     protected T[] array;
     protected int last;

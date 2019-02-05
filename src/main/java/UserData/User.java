@@ -11,22 +11,6 @@ public class User implements Comparable<User>{
             this.first = first;
             this.second = second;
         }
-
-        public T getFirst() {
-            return first;
-        }
-
-        public void setFirst(T first) {
-            this.first = first;
-        }
-
-        public K getSecond() {
-            return second;
-        }
-
-        public void setSecond(K second) {
-            this.second = second;
-        }
     }
     public static class Triplet<T, K , V> {
         T first;
@@ -34,31 +18,9 @@ public class User implements Comparable<User>{
         V third;
 
         public Triplet(T first, K second, V third) {
-
-        }
-
-        public T getFirst() {
-            return first;
-        }
-
-        public void setFirst(T first) {
-            this.first = first;
-        }
-
-        public K getSecond() {
-            return second;
-        }
-
-        public void setSecond(K second) {
-            this.second = second;
-        }
-
-        public V getThird() {
-            return third;
-        }
-
-        public void setThird(V third) {
-            this.third = third;
+            this.first=first;
+            this.second=second;
+            this.third=third;
         }
     }
 
@@ -66,7 +28,6 @@ public class User implements Comparable<User>{
     private String name;
     private int age;
     private String email;
-    private boolean isMale;
     private int views;
 
     private UnorderedListADT<Pair<Integer, String>> academicFormation;
@@ -76,17 +37,25 @@ public class User implements Comparable<User>{
     private UnorderedListADT<Integer> mentions;
 
 
+    public User(int id, String name, int age, String email, int views,ArrayUnorderedList<Pair<Integer, String>> academicFormation, ArrayUnorderedList<Triplet<Integer, String, String>> professionalExperience, ArrayUnorderedList<String> skills, ArrayUnorderedList<Integer> contacts, ArrayUnorderedList<Integer> mentions) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.email = email;
+        this.views = views;
+        this.academicFormation = academicFormation;
+        this.professionalExperience = professionalExperience;
+        this.skills = skills;
+        this.contacts = contacts;
+        this.mentions = mentions;
+    }
+
     public User(int id, String name, int age, String email, int views) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.email = email;
         this.views = views;
-        this.academicFormation = new ArrayUnorderedList<Pair<Integer, String>>();
-        this.professionalExperience = new ArrayUnorderedList<Triplet<Integer, String, String>>();
-        this.skills = new ArrayUnorderedList<String>();
-        this.contacts = new ArrayUnorderedList<Integer>();
-        this.mentions = new ArrayUnorderedList<Integer>();
     }
 
     public int getId() {
@@ -101,12 +70,23 @@ public class User implements Comparable<User>{
     public void setName(String name) {
         this.name = name;
     }
-    public boolean isMale() {
-        return isMale;
+
+    public int getAge() {
+        return age;
     }
-    public void setMale(boolean male) {
-        isMale = male;
+
+    public void setAge(int age) {
+        this.age = age;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public int getViews() {
         return views;
     }
@@ -146,5 +126,46 @@ public class User implements Comparable<User>{
     @Override
     public int compareTo(User user) {
         return  (this.getId() - user.getId());
+    }
+
+    @Override
+    public String toString() {
+        String string = "\n\n";
+        string+="id:\t"+id+"\n";
+        string+="age:\t"+age+"\n";
+        string+="name:\t"+name+"\n";
+        string+="email:\t"+email+"\n";
+        string+="views:\t"+views+"\n";
+        String skillsString = "";
+        for (String s :
+                skills) {
+            skillsString+=s+",\t";
+        }
+        string+="skills:\t"+skillsString+"\n";
+        String contactsString = "";
+        for (Integer i :
+                contacts) {
+            contactsString+=i+",\t";
+        }
+        string+="contacts:\t"+contactsString+"\n";
+        String mentionsString = "";
+        for (Integer i :
+                mentions) {
+            mentionsString += i + ",\t";
+        }
+        string+="mentions:\t"+mentionsString+"\n";
+        String professionalExperienceString = "";
+        for (Triplet<Integer, String, String> t :
+                professionalExperience) {
+            professionalExperienceString += "\n\t{ano: " + t.first + "\tcargo: " + t.second + "\t" + "empresa: " + t.third + "}";
+        }
+        string+="professional experience:\t"+professionalExperienceString;
+        String academicFormationString = "";
+        for (Pair<Integer,String> p:
+                academicFormation) {
+            academicFormationString += "\n\t{ano: " +p.first + "\tformacao: "+ p.second + "}";
+        }
+        string+="\nacademic formation:\t"+academicFormationString;
+        return string;
     }
 }
