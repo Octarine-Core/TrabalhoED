@@ -1,13 +1,24 @@
 package Graphs;
 
+import LinkedListsStacksAndQueues.LinkedQueue;
+import ListsAndIterators.ArraySet;
+import ListsAndIterators.ArrayUnorderedList;
+
 import java.util.Iterator;
 
 public class MatrixDiGraph<T>implements GraphADT<T> {
     double[][] matrix;
     int numOfVertices;
     int numOfEdges;
-    private int SIZE = 50;
+    protected int SIZE = 50;
     T vertices[];
+
+    public MatrixDiGraph() {
+        matrix = new double[SIZE][SIZE];
+        vertices = (T[]) new Object[SIZE];
+        numOfEdges = 0;
+        numOfVertices = 0;
+    }
 
     @Override
     public void addVertex(T vertex) {
@@ -43,7 +54,24 @@ public class MatrixDiGraph<T>implements GraphADT<T> {
 
     @Override
     public Iterator iteratorBFS(T startVertex) {
-        return null;
+        LinkedQueue<T> queue = new LinkedQueue<>();
+        ArraySet<T> visitedVertices = new ArraySet<>();
+        visitedVertices.add(startVertex);
+        queue.enqueue(startVertex);
+
+        while (!queue.isEmpty()){
+            T v = queue.dequeue();
+            for(int i = 0; i<numOfVertices; i++){
+                for (int j = 0;j < matrix[getIndex(v)].length; j++) {
+                    if(matrix[getIndex(v)][j]!= 0 && !visitedVertices.contains(vertices[j])){
+                        queue.enqueue(vertices[j]);
+                        visitedVertices.add(vertices[j]);
+                    }
+                }
+            }
+        }
+
+        return visitedVertices.iterator();
     }
 
     @Override
@@ -53,8 +81,10 @@ public class MatrixDiGraph<T>implements GraphADT<T> {
 
     @Override
     public Iterator iteratorShortestPath(T startVertex, T targetVertex) {
+        ArrayUnorderedList<T> iterList = new ArrayUnorderedList<>();
+        //Code goes here
 
-        return null;
+        return iterList.iterator();
     }
 
     @Override

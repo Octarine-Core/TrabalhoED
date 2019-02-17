@@ -1,8 +1,9 @@
 package UserData;
 
+import Graphs.MatrixWeightedDiGraph;
 import ListsAndIterators.ArrayUnorderedList;
 
-public class SystemInterface {
+public class SystemInterface extends MatrixWeightedDiGraph<User> {
     /*
    *
     • Editar as ligações e visualizações no grafo após ser carregado do ficheiro;
@@ -48,5 +49,25 @@ public class SystemInterface {
         }
         return UsersEmployedAt;
     }
+
+    User findUserFromId(int id){
+        for (User u :
+                userList) {
+            if (u.getEmail().equals(id)){
+                return u;
+            }
+        }
+        return null;
+    }
+
+    void mention(User mentionedUser, User mentionerUser){
+        if(mentionedUser==null || mentionerUser == null){
+            return;
+        }
+        mentionedUser.getMentions().addToRear(mentionerUser.getId());
+    }
+
+
+
 
 }
